@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>MM2 VALUES</title>
+
+<link rel="stylesheet" href="style.css">
+
+<!-- Fonte estilo Apple -->
+<link href="https://fonts.cdnfonts.com/css/sf-pro-display" rel="stylesheet">
+
+</head>
+<body>
+
+<!-- 🔊 AUDIO DE CLICK -->
+<audio id="clickSound" src="click.mp3" preload="auto"></audio>
+
+<!-- 🔹 BOTÃO MENU HAMBURGUER -->
+<div class="menu-btn glass" id="menuBtn" onclick="toggleMenu(); playClick();">
+    <span></span>
+    <span></span>
+    <span></span>
+</div>
+
+<!-- 🔹 OVERLAY -->
+<div id="overlay" onclick="closeMenu()"></div>
+
+<!-- 🔹 MENU LATERAL -->
+<div class="sidebar glass" id="sidebar">
+
+    <!-- 🔧 EDITE AQUI OS LINKS DO MENU -->
+    <a href="#">Home</a>
+    <a href="#">Atualizações</a>
+    <a href="#">Sobre</a>
+    <a href="#">Contato</a>
+
+    <!-- 👆 Você pode:
+         - Alterar nomes dos links
+         - Alterar URLs no href=""
+         - Adicionar mais <a> abaixo
+    -->
+
+</div>
+
+<!-- 🔹 TÍTULO -->
+<header>
+    <h1>MM2 VALUES</h1>
+
+    <!-- 🔍 BOTÃO DE PESQUISA -->
+    <div class="search-wrapper">
+        <div class="search-icon glass" onclick="toggleSearch(); playClick();">🔍</div>
+        <input type="text" id="searchInput" placeholder="Pesquisar..." oninput="filterItems()">
+    </div>
+</header>
+
+<!-- 🔹 FILTROS DE RARIDADE -->
+<div class="filters">
+
+<button onclick="filterCategory('all'); playClick();" class="active">Todos</button>
+<button onclick="filterCategory('Common'); playClick();">Common</button>
+<button onclick="filterCategory('Uncommon'); playClick();">Uncommon</button>
+<button onclick="filterCategory('Rare'); playClick();">Rare</button>
+<button onclick="filterCategory('Legendary'); playClick();">Legendary</button>
+<button onclick="filterCategory('Godly'); playClick();">Godly</button>
+<button class="chroma" onclick="filterCategory('Chroma'); playClick();">Chroma</button>
+<button onclick="filterCategory('Vintages'); playClick();">Vintages</button>
+<button onclick="filterCategory('Ancient'); playClick();">Ancient</button>
+<button onclick="filterCategory('Evo'); playClick();">Evo</button>
+<button onclick="filterCategory('Unique'); playClick();">Unique</button>
+<button onclick="filterCategory('Set'); playClick();">Sets</button>
+
+<!-- 🔄 BOTÃO DE CLASSIFICAÇÃO -->
+<div class="sort glass" onclick="changeSort(); playClick();">
+    <span id="sortType">Valor ↓</span>
+</div>
+
+</div>
+
+<!-- 🔹 GRID DE ITENS -->
+<section class="items" id="itemsContainer">
+
+    <!-- 🔥 COMO ADICIONAR UM ITEM 🔥 -->
+    <!--
+        data-name="Nome"
+        data-value="100"
+        data-rarity="Godly"
+        data-origin="Caixa X"
+        
+        IMG:
+        faca1.png deve estar em /facas/
+        arma1.png deve estar em /armas/
+    -->
+
+    <div class="item glass"
+        data-name="Default_Knife"
+        data-value="0"
+        data-rarity="Common"
+        data-origin="Dada para todos usuários">
+
+        <img src="facas/Default_Knife.png">
+        <h3>Default Knife</h3>
+        <p>Valor: 0</p>
+        <p>Origem: Dada para todos usuários</p>
+        <p>Raridade: Common</p>
+    </div>
+
+
+        <!-- ITEM 2 -->
+    <div class="item glass"
+        data-name="Default_Gun"
+        data-value="0"
+        data-rarity="Common"
+        data-origin="Dada para todos usuários">
+
+        <img src="armas/Default_Gun.png">
+        <h3>Default Gun</h3>
+        <p>Valor: 0</p>
+        <p>Origem: Dada para todos usuários</p>
+        <p>Raridade: Common</p>
+    </div>
+
+
+        <!-- ITEM 3 -->
+    <div class="item glass"
+        data-name="Glitch"
+        data-value="75"
+        data-rarity="Common"
+        data-origin="Exclusão da Asa de Morcego Divina
+Última Alteração de Valor">
+
+        <img src="armas/Glitch.png">
+        <h3>Chroma Darkbringer</h3>
+        <p>Valor: 75</p>
+        <p>Origem: Exclusão da Asa de Morcego Divina
+Última Alteração de Valor</p>
+        <p>Raridade: Common</p>
+    </div>
+
+
+        <!-- ITEM 4 -->
+    <div class="item glass"
+        data-name="Glitch2"
+        data-value="55"
+        data-rarity="Common"
+        data-origin="Exclusão da Luger
+Última alteração de valor">
+
+        <img src="armas/Glitch2.png">
+        <h3>Glitch2</h3>
+        <p>Valor: 55</p>
+        <p>Origem: Exclusão da Luger
+Última alteração de valor</p>
+        <p>Raridade: Common</p>
+    </div>
+
+</section>
+
+<script>
+
+let currentCategory = "all"
+let sortMode = "value"
+
+function playClick(){
+    document.getElementById("clickSound").play()
+}
+
+function toggleMenu(){
+    document.getElementById("sidebar").classList.toggle("open")
+    document.getElementById("overlay").classList.toggle("active")
+    document.getElementById("menuBtn").classList.toggle("hidden")
+}
+
+function closeMenu(){
+    document.getElementById("sidebar").classList.remove("open")
+    document.getElementById("overlay").classList.remove("active")
+    document.getElementById("menuBtn").classList.remove("hidden")
+}
+
+function toggleSearch(){
+    document.getElementById("searchInput").classList.toggle("active")
+}
+
+function normalize(text){
+    return text.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"")
+}
+
+function filterItems(){
+    let input = normalize(document.getElementById("searchInput").value)
+    let items = document.querySelectorAll(".item")
+
+    items.forEach(item=>{
+        let name = normalize(item.dataset.name)
+        let rarity = item.dataset.rarity
+
+        let matchSearch = name.includes(input)
+        let matchCategory = currentCategory==="all" || rarity===currentCategory
+
+        item.style.display = (matchSearch && matchCategory) ? "flex" : "none"
+    })
+}
+
+function filterCategory(category){
+    currentCategory = category
+    filterItems()
+}
+
+function changeSort(){
+    let container = document.getElementById("itemsContainer")
+    let items = Array.from(document.querySelectorAll(".item"))
+
+    if(sortMode==="value"){
+        sortMode="az"
+        document.getElementById("sortType").innerText="A-Z"
+        items.sort((a,b)=>a.dataset.name.localeCompare(b.dataset.name))
+    }
+    else{
+        sortMode="value"
+        document.getElementById("sortType").innerText="Valor ↓"
+        items.sort((a,b)=>b.dataset.value - a.dataset.value)
+    }
+
+    items.forEach(item=>container.appendChild(item))
+}
+
+</script>
+
+</body>
+</html>
