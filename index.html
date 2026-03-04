@@ -8,49 +8,177 @@
 <link rel="stylesheet" href="style.css">
 <link href="https://fonts.cdnfonts.com/css/sf-pro-display" rel="stylesheet">
 
+<style>
+body{
+  margin:0;
+  font-family:'SF Pro Display', sans-serif;
+  background:#0f0f14;
+  color:white;
+}
+
+/* ===== BOTÃO ☰ ===== */
+.menu-btn{
+  position:fixed;
+  top:20px;
+  left:20px;
+  width:30px;
+  height:22px;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  cursor:pointer;
+  z-index:1001;
+}
+
+.menu-btn span{
+  height:3px;
+  background:white;
+  border-radius:5px;
+}
+
+.menu-btn.hidden{
+  display:none;
+}
+
+/* ===== MENU LATERAL ===== */
+.menu{
+  position:fixed;
+  top:0;
+  left:-260px;
+  width:240px;
+  height:100%;
+  background:#16161f;
+  padding:20px;
+  transition:0.3s;
+  z-index:1002;
+}
+
+.menu.open{
+  left:0;
+}
+
+.menu a{
+  display:block;
+  margin:15px 0;
+  color:white;
+  text-decoration:none;
+}
+
+.overlay{
+  position:fixed;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0.5);
+  display:none;
+  z-index:1000;
+}
+
+.overlay.active{
+  display:block;
+}
+
+/* ===== HEADER ===== */
+header{
+  text-align:center;
+  padding:20px 0;
+  font-size:28px;
+  font-weight:600;
+}
+
+/* ===== PESQUISA ===== */
+.search-box{
+  display:flex;
+  justify-content:center;
+  margin-bottom:20px;
+}
+
+.search-box input{
+  width:300px;
+  padding:10px;
+  border-radius:10px;
+  border:none;
+  outline:none;
+}
+
+/* ===== CATEGORIAS ===== */
+.categories{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:10px;
+  margin-bottom:20px;
+}
+
+.categories button{
+  padding:8px 15px;
+  border:none;
+  border-radius:20px;
+  cursor:pointer;
+}
+
+/* ===== ITENS ===== */
+.items{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(180px,1fr));
+  gap:15px;
+  padding:20px;
+}
+
+.item{
+  background:#1c1c25;
+  padding:15px;
+  border-radius:15px;
+  text-align:center;
+}
+
+.item img{
+  width:100%;
+  height:120px;
+  object-fit:contain;
+}
+</style>
 </head>
 <body>
 
-<audio id="clickSound" src="click.mp3"></audio>
-
-<!-- BOTÃO MENU (3 BARRINHAS) -->
-<div class="menu-btn glass" id="menuBtn" onclick="toggleMenu(); playClick();">
-    <span></span>
-    <span></span>
-    <span></span>
+<!-- ☰ BOTÃO -->
+<div class="menu-btn" onclick="toggleMenu()">
+  <span></span>
+  <span></span>
+  <span></span>
 </div>
 
-<!-- FUNDO ESCURO -->
-<div id="overlay" onclick="closeMenu()"></div>
+<!-- OVERLAY -->
+<div class="overlay" onclick="closeMenu()" id="overlay"></div>
 
-<!-- MENU LATERAL -->
-<div class="sidebar glass" id="sidebar">
+<!-- MENU -->
+<div class="menu" id="menu">
 
-    <!-- 🔥 COMO EDITAR OS LINKS 🔥 -->
-
-    <!--
-    PARA MUDAR O LINK:
-    1- Troque o link dentro do href=""
-    2- Troque o nome entre > e </a>
-    3- Se quiser abrir em outra aba deixe target="_blank"
-    -->
-
-    <a href="https://sleepyofc7.github.io/meu-hub/" target="_blank">🏠 HUB</a>
-    <a href="https://roblox.com" target="_blank">Roblox</a>
-    <a href="#">Atualizações</a>
-
-    <!-- PARA ADICIONAR OUTRO LINK:
-    <a href="LINK_AQUI" target="_blank">NOME AQUI</a>
-    -->
+  <!-- 🔥 COMO EDITAR LINKS -->
+  <!-- Troque o href e o nome -->
+  <a href="https://sleepyofc7.github.io/meu-hub/" target="_blank">🏠 HUB</a>
+  <a href="https://roblox.com" target="_blank">Roblox</a>
+  <a href="#">Atualizações</a>
 
 </div>
 
-<!-- HEADER -->
-<header class="glass">
-    <h1>MM2 VALUES</h1>
-</header>
+<header>MM2 VALUES</header>
 
-<!-- ITENS -->
+<!-- 🔍 PESQUISA INTELIGENTE -->
+<div class="search-box">
+  <input type="text" id="searchInput" placeholder="Pesquisar item..." onkeyup="renderItems()">
+</div>
+
+<!-- 📂 CATEGORIAS -->
+<div class="categories">
+  <button onclick="setCategory('all')">Todos</button>
+  <button onclick="setCategory('Common')">Common</button>
+  <button onclick="setCategory('Uncommon')">Uncommon</button>
+  <button onclick="setCategory('Rare')">Rare</button>
+  <button onclick="setCategory('Legendary')">Legendary</button>
+  <button onclick="setCategory('Godly')">Godly</button>
+  <button onclick="setCategory('Chroma')">Chroma</button>
+</div>
+
 <section class="items" id="itemsContainer"></section>
 
 <script src="items.js"></script>
@@ -59,51 +187,63 @@
 
 let currentCategory = "all"
 
-const sidebar = document.getElementById("sidebar")
-const overlay = document.getElementById("overlay")
-const menuBtn = document.getElementById("menuBtn")
-
-function playClick(){
-  document.getElementById("clickSound").play()
-}
-
+/* ===== MENU SCRIPT IGUAL AO SEU ===== */
 function toggleMenu(){
-  sidebar.classList.toggle("open")
-  overlay.classList.toggle("active")
-  menuBtn.classList.toggle("hidden")
+  const menu = document.getElementById("menu");
+  const overlay = document.getElementById("overlay");
+  const btn = document.querySelector(".menu-btn");
+
+  const isOpen = menu.classList.toggle("open");
+  overlay.classList.toggle("active");
+
+  if (isOpen) {
+    btn.classList.add("hidden");
+  } else {
+    btn.classList.remove("hidden");
+  }
 }
 
 function closeMenu(){
-  sidebar.classList.remove("open")
-  overlay.classList.remove("active")
-  menuBtn.classList.remove("hidden")
+  document.getElementById("menu").classList.remove("open");
+  document.getElementById("overlay").classList.remove("active");
+  document.querySelector(".menu-btn").classList.remove("hidden");
 }
 
-// 🔥 CRIA OS ITENS AUTOMATICAMENTE
+/* ===== FILTRO DE CATEGORIA ===== */
+function setCategory(cat){
+  currentCategory = cat;
+  renderItems();
+}
+
+/* ===== RENDERIZAÇÃO ===== */
 function renderItems(){
 
   const container = document.getElementById("itemsContainer")
+  const searchValue = document.getElementById("searchInput").value.toLowerCase()
+
   container.innerHTML = ""
 
-  // Ordena por valor (maior para menor)
-  items.sort((a,b)=>b.value - a.value)
+  items
+  .filter(item => {
+      const matchCategory = currentCategory === "all" || item.rarity === currentCategory
+      const matchSearch = item.name.toLowerCase().includes(searchValue)
+      return matchCategory && matchSearch
+  })
+  .sort((a,b)=>b.value - a.value)
+  .forEach(item=>{
 
-  items.forEach(item=>{
+      const div = document.createElement("div")
+      div.className = "item"
 
-    const div = document.createElement("div")
-    div.className = "item glass"
+      div.innerHTML = `
+        <img src="image/${item.image}">
+        <h3>${item.name}</h3>
+        <p>Valor: ${item.value}</p>
+        <p>Origem: ${item.origin}</p>
+        <p>Raridade: ${item.rarity}</p>
+      `
 
-    div.innerHTML = `
-      <!-- IMAGENS DEVEM ESTAR DENTRO DA PASTA /image -->
-      <img src="image/${item.image}" alt="${item.name}">
-      <h3>${item.name}</h3>
-      <p>Valor: ${item.value}</p>
-      <p>Origem: ${item.origin}</p>
-      <p>Raridade: ${item.rarity}</p>
-    `
-
-    container.appendChild(div)
-
+      container.appendChild(div)
   })
 }
 
