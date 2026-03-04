@@ -13,36 +13,44 @@
 
 <audio id="clickSound" src="click.mp3"></audio>
 
-<!-- BOTÃO MENU -->
+<!-- BOTÃO MENU (3 BARRINHAS) -->
 <div class="menu-btn glass" id="menuBtn" onclick="toggleMenu(); playClick();">
     <span></span>
     <span></span>
     <span></span>
 </div>
 
+<!-- FUNDO ESCURO -->
 <div id="overlay" onclick="closeMenu()"></div>
 
 <!-- MENU LATERAL -->
 <div class="sidebar glass" id="sidebar">
 
-    <!-- 🔥 MUDE AQUI OS LINKS -->
-    <!-- Troque o texto entre > e </a> -->
-    <!-- Troque o link dentro do href="" -->
+    <!-- 🔥 COMO EDITAR OS LINKS 🔥 -->
 
-    <a href="https://sleepyofc7.github.io/meu-hub/" target="_blank">🏠HUB</a>
+    <!--
+    PARA MUDAR O LINK:
+    1- Troque o link dentro do href=""
+    2- Troque o nome entre > e </a>
+    3- Se quiser abrir em outra aba deixe target="_blank"
+    -->
+
+    <a href="https://sleepyofc7.github.io/meu-hub/" target="_blank">🏠 HUB</a>
     <a href="https://roblox.com" target="_blank">Roblox</a>
     <a href="#">Atualizações</a>
 
-    <!-- Para adicionar outro link:
+    <!-- PARA ADICIONAR OUTRO LINK:
     <a href="LINK_AQUI" target="_blank">NOME AQUI</a>
     -->
 
 </div>
 
-<header>
+<!-- HEADER -->
+<header class="glass">
     <h1>MM2 VALUES</h1>
 </header>
 
+<!-- ITENS -->
 <section class="items" id="itemsContainer"></section>
 
 <script src="items.js"></script>
@@ -50,6 +58,10 @@
 <script>
 
 let currentCategory = "all"
+
+const sidebar = document.getElementById("sidebar")
+const overlay = document.getElementById("overlay")
+const menuBtn = document.getElementById("menuBtn")
 
 function playClick(){
   document.getElementById("clickSound").play()
@@ -73,6 +85,7 @@ function renderItems(){
   const container = document.getElementById("itemsContainer")
   container.innerHTML = ""
 
+  // Ordena por valor (maior para menor)
   items.sort((a,b)=>b.value - a.value)
 
   items.forEach(item=>{
@@ -81,7 +94,8 @@ function renderItems(){
     div.className = "item glass"
 
     div.innerHTML = `
-      <img src="${item.image}">
+      <!-- IMAGENS DEVEM ESTAR DENTRO DA PASTA /image -->
+      <img src="image/${item.image}" alt="${item.name}">
       <h3>${item.name}</h3>
       <p>Valor: ${item.value}</p>
       <p>Origem: ${item.origin}</p>
