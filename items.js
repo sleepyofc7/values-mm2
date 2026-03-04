@@ -14,7 +14,7 @@ const items = [
   {
     name: "Gingerscope",
     image: "Gingerscope.png",
-    value: 18.000,
+    value: "18.000",
     rarity: "Ancient",
     origin: "Natal de 2023 (Tier 20)"
   },
@@ -22,7 +22,7 @@ const items = [
   {
     name: "TravelersAxe",
     image: "TravelersAxe.png",
-    value: 7.850,
+    value: "7.850",
     rarity: "Ancient",
     origin: "Halloween 2023 (Tier 30)"
   },
@@ -30,7 +30,7 @@ const items = [
    {
     name: "Celestial",
     image: "Celestial.png",
-    value: 1.775,
+    value: "1.775",
     rarity: "Ancient",
     origin: "Natal 2024 (Tier 20)"
   },
@@ -113,6 +113,70 @@ const items = [
     value: 13,
     rarity: "Ancient",
     origin: "Natal 2018 Item Pack"
+  },
+
+  {
+    name: "Ghost",
+    image: "Ghost.png",
+    value: 10,
+    rarity: "Vintage",
+    origin: "MM1 (1,200 Coins)"
+  },
+
+  {
+    name: "Blood",
+    image: "Blood.png",
+    value: 8,
+    rarity: "Vintage",
+    origin: "MM1 (4,000 Coins)"
+  },
+
+  {
+    name: "Laser",
+    image: "Laser.png",
+    value: 8,
+    rarity: "Vintage",
+    origin: "MM1 (1,200 Coins)"
+  },
+
+  {
+    name: "America",
+    image: "America.png",
+    value: 8,
+    rarity: "Vintage",
+    origin: "MM1 July 4th (25 Cash)"
+  },
+
+  {
+    name: "Prince",
+    image: "Prince.png",
+    value: 6,
+    rarity: "Vintage",
+    origin: "MM1 (2,000 Coins)"
+  },
+
+  {
+    name: "Shadow",
+    image: "Shadow.png",
+    value: 6,
+    rarity: "Vintage",
+    origin: "MM1 (3,000 Coins)"
+  },
+  
+  {
+    name: "Phaser",
+    image: "Phaser.png",
+    value: 5,
+    rarity: "Vintage",
+    origin: "MM1 (2,000 Coins)"
+  },
+
+  {
+    name: "Cowboy",
+    image: "Cowboy.png",
+    value: 4,
+    rarity: "Vintage",
+    origin: "MM1 (800 Coins)"
   },
 
 ];
