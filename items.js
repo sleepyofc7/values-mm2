@@ -51,4 +51,68 @@ const items = [
     origin: "Halloween 2021 (Tier 30)"
   },
 
+  {
+    name: "Icepiercer",
+    image: "Icepiercer.png",
+    value: 300,
+    rarity: "Ancient",
+    origin: "Natal 2022 (Tier 20)"
+  },
+
+  {
+    name: "Icebreaker",
+    image: "Icebreaker.png",
+    value: 115,
+    rarity: "Ancient",
+    origin: "Natal 2020 (Tier 20)"
+  },
+
+  {
+    name: "Batwing",
+    image: "Batwing.png",
+    value: 57,
+    rarity: "Ancient",
+    origin: "Halloween 2018 Item Pack"
+  },
+
+  {
+    name: "Swirly Axe",
+    image: "Swirly_Axe.png",
+    value: 55,
+    rarity: "Ancient",
+    origin: "Natal 2021 (Tier 20)"
+  },
+
+  {
+    name: "Elderwood Scythe",
+    image: "Elderwood_Scythe.png",
+    value: 55,
+    rarity: "Ancient",
+    origin: "Halloween 2019 (Tier 40)"
+  },
+
+  {
+    name: "Hallowscythe",
+    image: "Hallowscythe.png",
+    value: 45,
+    rarity: "Ancient",
+    origin: "Halloween 2020 (Tier 30)"
+  },
+
+  {
+    name: "Logchopper",
+    image: "Logchopper.png",
+    value: 20,
+    rarity: "Ancient",
+    origin: "Natal 2019 (Tier 30)"
+  },
+
+  {
+    name: "Logchopper",
+    image: "Icewing.png",
+    value: 13,
+    rarity: "Ancient",
+    origin: "Natal 2018 Item Pack"
+  },
+
 ];
