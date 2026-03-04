@@ -5,15 +5,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MM2 VALUES</title>
 
-<link rel="stylesheet" href="style.css">
 <link href="https://fonts.cdnfonts.com/css/sf-pro-display" rel="stylesheet">
 
 <style>
+
+/* ===== FUNDO ===== */
 body{
   margin:0;
   font-family:'SF Pro Display', sans-serif;
-  background:#0f0f14;
+  background:linear-gradient(135deg,#0f0f18,#1a1a2e,#111827);
+  background-attachment:fixed;
   color:white;
+  cursor:url("https://cur.cursors-4u.net/games/gam-15/gam1422.cur"), auto;
 }
 
 /* ===== BOTÃO ☰ ===== */
@@ -34,23 +37,25 @@ body{
   height:3px;
   background:white;
   border-radius:5px;
+  transition:0.3s;
 }
 
 .menu-btn.hidden{
   display:none;
 }
 
-/* ===== MENU LATERAL ===== */
+/* ===== MENU ===== */
 .menu{
   position:fixed;
   top:0;
   left:-260px;
   width:240px;
   height:100%;
-  background:#16161f;
+  background:#141421;
   padding:20px;
   transition:0.3s;
   z-index:1002;
+  box-shadow:5px 0 20px rgba(0,0,0,0.5);
 }
 
 .menu.open{
@@ -62,13 +67,19 @@ body{
   margin:15px 0;
   color:white;
   text-decoration:none;
+  font-size:16px;
+  transition:0.2s;
+}
+
+.menu a:hover{
+  opacity:0.7;
 }
 
 .overlay{
   position:fixed;
   width:100%;
   height:100%;
-  background:rgba(0,0,0,0.5);
+  background:rgba(0,0,0,0.6);
   display:none;
   z-index:1000;
 }
@@ -80,8 +91,8 @@ body{
 /* ===== HEADER ===== */
 header{
   text-align:center;
-  padding:20px 0;
-  font-size:28px;
+  padding:25px 0;
+  font-size:30px;
   font-weight:600;
 }
 
@@ -89,15 +100,16 @@ header{
 .search-box{
   display:flex;
   justify-content:center;
-  margin-bottom:20px;
+  margin-bottom:25px;
 }
 
 .search-box input{
-  width:300px;
-  padding:10px;
-  border-radius:10px;
+  width:320px;
+  padding:12px;
+  border-radius:12px;
   border:none;
   outline:none;
+  font-size:14px;
 }
 
 /* ===== CATEGORIAS ===== */
@@ -106,69 +118,78 @@ header{
   flex-wrap:wrap;
   justify-content:center;
   gap:10px;
-  margin-bottom:20px;
+  margin-bottom:30px;
+  padding:0 20px;
 }
 
 .categories button{
-  padding:8px 15px;
+  padding:8px 14px;
   border:none;
   border-radius:20px;
   cursor:pointer;
+  background:#1e1e2d;
+  color:white;
+  transition:0.2s;
+}
+
+.categories button:hover{
+  background:#2a2a3d;
 }
 
 /* ===== ITENS ===== */
 .items{
   display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(180px,1fr));
-  gap:15px;
-  padding:20px;
+  grid-template-columns:repeat(auto-fill,minmax(190px,1fr));
+  gap:20px;
+  padding:0 40px 40px 40px; /* 👈 ESPAÇAMENTO LATERAL CORRIGIDO */
 }
 
 .item{
   background:#1c1c25;
   padding:15px;
-  border-radius:15px;
+  border-radius:18px;
   text-align:center;
+  transition:0.2s;
+}
+
+.item:hover{
+  transform:translateY(-5px);
 }
 
 .item img{
   width:100%;
-  height:120px;
+  height:130px;
   object-fit:contain;
+  margin-bottom:10px;
 }
+
 </style>
 </head>
 <body>
 
+<audio id="clickSound" src="click.mp3" preload="auto"></audio>
+
 <!-- ☰ BOTÃO -->
-<div class="menu-btn" onclick="toggleMenu()">
+<div class="menu-btn" onclick="toggleMenu(); playClick();">
   <span></span>
   <span></span>
   <span></span>
 </div>
 
-<!-- OVERLAY -->
 <div class="overlay" onclick="closeMenu()" id="overlay"></div>
 
-<!-- MENU -->
 <div class="menu" id="menu">
-
-  <!-- 🔥 COMO EDITAR LINKS -->
-  <!-- Troque o href e o nome -->
   <a href="https://sleepyofc7.github.io/meu-hub/" target="_blank">🏠 HUB</a>
-  <a href="https://roblox.com" target="_blank">Roblox</a>
-  <a href="#">Atualizações</a>
-
+  <a href="https://sleepyofc7.github.io/CONTADOR-DE-PARTIDAS-MM2/" target="_blank">Contador de Partidas</a>
+  <a href="https://www.roblox.com/pt/games/142823291/Murder-Mystery-2" target="_blank">Murder Mystery 2</a>
 </div>
 
 <header>MM2 VALUES</header>
 
-<!-- 🔍 PESQUISA INTELIGENTE -->
 <div class="search-box">
   <input type="text" id="searchInput" placeholder="Pesquisar item..." onkeyup="renderItems()">
 </div>
 
-<!-- 📂 CATEGORIAS -->
 <div class="categories">
   <button onclick="setCategory('all')">Todos</button>
   <button onclick="setCategory('Common')">Common</button>
@@ -177,6 +198,10 @@ header{
   <button onclick="setCategory('Legendary')">Legendary</button>
   <button onclick="setCategory('Godly')">Godly</button>
   <button onclick="setCategory('Chroma')">Chroma</button>
+  <button onclick="setCategory('Vintage')">Vintage</button>
+  <button onclick="setCategory('Ancient')">Ancient</button>
+  <button onclick="setCategory('Evo')">Evo</button>
+  <button onclick="setCategory('Unique')">Unique</button>
 </div>
 
 <section class="items" id="itemsContainer"></section>
@@ -187,35 +212,38 @@ header{
 
 let currentCategory = "all"
 
-/* ===== MENU SCRIPT IGUAL AO SEU ===== */
+function playClick(){
+  const audio = document.getElementById("clickSound")
+  audio.currentTime = 0
+  audio.play()
+}
+
 function toggleMenu(){
-  const menu = document.getElementById("menu");
-  const overlay = document.getElementById("overlay");
-  const btn = document.querySelector(".menu-btn");
+  const menu = document.getElementById("menu")
+  const overlay = document.getElementById("overlay")
+  const btn = document.querySelector(".menu-btn")
 
-  const isOpen = menu.classList.toggle("open");
-  overlay.classList.toggle("active");
+  const isOpen = menu.classList.toggle("open")
+  overlay.classList.toggle("active")
 
-  if (isOpen) {
-    btn.classList.add("hidden");
+  if (isOpen){
+    btn.classList.add("hidden")
   } else {
-    btn.classList.remove("hidden");
+    btn.classList.remove("hidden")
   }
 }
 
 function closeMenu(){
-  document.getElementById("menu").classList.remove("open");
-  document.getElementById("overlay").classList.remove("active");
-  document.querySelector(".menu-btn").classList.remove("hidden");
+  document.getElementById("menu").classList.remove("open")
+  document.getElementById("overlay").classList.remove("active")
+  document.querySelector(".menu-btn").classList.remove("hidden")
 }
 
-/* ===== FILTRO DE CATEGORIA ===== */
 function setCategory(cat){
-  currentCategory = cat;
-  renderItems();
+  currentCategory = cat
+  renderItems()
 }
 
-/* ===== RENDERIZAÇÃO ===== */
 function renderItems(){
 
   const container = document.getElementById("itemsContainer")
@@ -224,26 +252,25 @@ function renderItems(){
   container.innerHTML = ""
 
   items
-  .filter(item => {
-      const matchCategory = currentCategory === "all" || item.rarity === currentCategory
-      const matchSearch = item.name.toLowerCase().includes(searchValue)
-      return matchCategory && matchSearch
+  .filter(item=>{
+    const matchCategory = currentCategory==="all" || item.rarity===currentCategory
+    const matchSearch = item.name.toLowerCase().includes(searchValue)
+    return matchCategory && matchSearch
   })
   .sort((a,b)=>b.value - a.value)
   .forEach(item=>{
 
-      const div = document.createElement("div")
-      div.className = "item"
+    const div = document.createElement("div")
+    div.className="item"
 
-      div.innerHTML = `
-        <img src="image/${item.image}">
-        <h3>${item.name}</h3>
-        <p>Valor: ${item.value}</p>
-        <p>Origem: ${item.origin}</p>
-        <p>Raridade: ${item.rarity}</p>
-      `
+    div.innerHTML=`
+      <img src="image/${item.image}">
+      <h3>${item.name}</h3>
+      <p>Valor: ${item.value}</p>
+      <p>${item.rarity}</p>
+    `
 
-      container.appendChild(div)
+    container.appendChild(div)
   })
 }
 
