@@ -179,4 +179,20 @@ const items = [
     origin: "MM1 (800 Coins)"
   },
 
+  {
+    name: "Golden",
+    image: "Golden.png",
+    value: 4,
+    rarity: "Vintage",
+    origin: "MM1 (3,500 Coins)"
+  },
+
+  {
+    name: "Splitter",
+    image: "Splitter.png",
+    value: 3,
+    rarity: "Vintage",
+    origin: " MM1 (800 Coins)"
+  },
+
 ];
