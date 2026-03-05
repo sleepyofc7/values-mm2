@@ -17,7 +17,7 @@
 
 <!-- BOTÃO MENU -->
 
-<div class="menu-btn" onclick="toggleMenu()">
+<div class="menu-btn" onclick="toggleMenu();playClick()">
 ☰
 </div>
 
@@ -27,24 +27,32 @@
 
 <h2>Menu</h2>
 
-<a href="#">Home</a>
-<a href="#">Trading</a>
-<a href="#">Discord</a>
-<a href="#">Outro Site</a>
+<a onclick="playClick()" href="https://sleepyofc7.github.io/meu-hub/" target="_blank">🏠HUB</a>
+<a onclick="playClick()" href="https://www.roblox.com/pt/games/142823291/Murder-Mystery-2" target="_blank">Murder Mystery</a>
+<a onclick="playClick()" href="https://sleepyofc7.github.io/CONTADOR-DE-PARTIDAS-MM2/" target="_blank">Contador de Partidas</a>
 
 </div>
 
 <div id="overlay" onclick="toggleMenu()"></div>
 
-<!-- TITULO -->
-
 <header>
 
-<h1 class="title">
-MM2 VALUES
-</h1>
+<h1 class="title">MM2 VALUES</h1>
 
 </header>
+
+<!-- 🔎 PESQUISA -->
+
+<div class="search glass">
+
+<input
+type="text"
+placeholder="🔎 Buscar item..."
+id="searchInput"
+oninput="searchItems()"
+/>
+
+</div>
 
 <!-- FILTROS -->
 
@@ -64,25 +72,25 @@ MM2 VALUES
 
 <div class="categories">
 
-<button onclick="filterCategory('All')">All</button>
+<button class="active" onclick="filterCategory(event,'All')">All</button>
 
-<button onclick="filterCategory('Common')">Common</button>
-<button onclick="filterCategory('Uncommon')">Uncommon</button>
-<button onclick="filterCategory('Rare')">Rare</button>
-<button onclick="filterCategory('Legendary')">Legendary</button>
+<button onclick="filterCategory(event,'Common')">Common</button>
+<button onclick="filterCategory(event,'Uncommon')">Uncommon</button>
+<button onclick="filterCategory(event,'Rare')">Rare</button>
+<button onclick="filterCategory(event,'Legendary')">Legendary</button>
 
-<button onclick="filterCategory('Godly')">Godly</button>
-<button onclick="filterCategory('Chroma')">Chroma</button>
+<button onclick="filterCategory(event,'Godly')">Godly</button>
+<button onclick="filterCategory(event,'Chroma')">Chroma</button>
 
-<button onclick="filterCategory('Vintage')">Vintage</button>
-<button onclick="filterCategory('Ancient')">Ancient</button>
-<button onclick="filterCategory('Evo')">Evo</button>
-<button onclick="filterCategory('Unique')">Unique</button>
+<button onclick="filterCategory(event,'Vintage')">Vintage</button>
+<button onclick="filterCategory(event,'Ancient')">Ancient</button>
+<button onclick="filterCategory(event,'Evo')">Evo</button>
+<button onclick="filterCategory(event,'Unique')">Unique</button>
 
-<button onclick="filterCategory('Untradable')">Untradable</button>
-<button onclick="filterCategory('Misc')">Misc item</button>
-<button onclick="filterCategory('Pet')">Pet</button>
-<button onclick="filterCategory('Set')">Set</button>
+<button onclick="filterCategory(event,'Untradable')">Untradable</button>
+<button onclick="filterCategory(event,'Misc')">Misc item</button>
+<button onclick="filterCategory(event,'Pet')">Pet</button>
+<button onclick="filterCategory(event,'Set')">Set</button>
 
 </div>
 
@@ -95,18 +103,18 @@ MM2 VALUES
 
 <script>
 
-let allItems = [...items, ...others]
-let current = [...allItems]
+let allItems=[...items,...others]
+let current=[...allItems]
 
 function render(){
 
-let container = document.getElementById("items")
+let container=document.getElementById("items")
 
-container.innerHTML = ""
+container.innerHTML=""
 
 current.forEach(item=>{
 
-let glow = ""
+let glow=""
 
 if(item.rarity=="Godly") glow="godly"
 if(item.rarity=="Chroma") glow="chroma"
@@ -131,9 +139,30 @@ document.getElementById("counter").innerText=current.length+" itens"
 
 }
 
-function filterCategory(cat){
+function searchItems(){
+
+let text=document
+.getElementById("searchInput")
+.value
+.toLowerCase()
+
+current=allItems.filter(item=>
+item.name.toLowerCase().includes(text)
+)
+
+render()
+
+}
+
+function filterCategory(e,cat){
 
 playClick()
+
+document
+.querySelectorAll(".categories button")
+.forEach(btn=>btn.classList.remove("active"))
+
+e.target.classList.add("active")
 
 if(cat=="All"){
 current=[...allItems]
@@ -151,31 +180,17 @@ playClick()
 
 let v=e.target.value
 
-if(v=="az"){
+if(v=="az") current.sort((a,b)=>a.name.localeCompare(b.name))
 
-current.sort((a,b)=>a.name.localeCompare(b.name))
+if(v=="value") current.sort((a,b)=>b.value-a.value)
 
-}
-
-if(v=="value"){
-
-current.sort((a,b)=>b.value-a.value)
-
-}
-
-if(v=="rarity"){
-
-current.sort((a,b)=>a.rarity.localeCompare(b.rarity))
-
-}
+if(v=="rarity") current.sort((a,b)=>a.rarity.localeCompare(b.rarity))
 
 render()
 
 })
 
 function toggleMenu(){
-
-playClick()
 
 let menu=document.getElementById("menu")
 let overlay=document.getElementById("overlay")
@@ -187,11 +202,11 @@ overlay.classList.toggle("show")
 
 function playClick(){
 
-document.getElementById("clickSound").play()
+let audio=document.getElementById("clickSound")
+audio.currentTime=0
+audio.play()
 
 }
-
-document.addEventListener("click",playClick)
 
 render()
 
