@@ -8,7 +8,8 @@ const items = [
     image: "Niks_Scythe.png",
     value: "inestimável",
     rarity: "Ancient",
-    origin: "Presente de Nikilis"
+    origin: "Presente de Nikilis",
+    folder:"image"
   },
 
   {
@@ -16,7 +17,8 @@ const items = [
     image: "Gingerscope.png",
     value: "18.000",
     rarity: "Ancient",
-    origin: "Natal de 2023 (Tier 20)"
+    origin: "Natal de 2023 (Tier 20)",
+    folder:"image"
   },
 
   {
@@ -24,7 +26,8 @@ const items = [
     image: "TravelersAxe.png",
     value: "7.850",
     rarity: "Ancient",
-    origin: "Halloween 2023 (Tier 30)"
+    origin: "Halloween 2023 (Tier 30)",
+    folder:"image"
   },
 
    {
@@ -32,7 +35,8 @@ const items = [
     image: "Celestial.png",
     value: "1.775",
     rarity: "Ancient",
-    origin: "Natal 2024 (Tier 20)"
+    origin: "Natal 2024 (Tier 20)",
+    folder:"image"
   },
 
   {
@@ -40,7 +44,8 @@ const items = [
     image: "Vampires_Axe.png",
     value: 925,
     rarity: "Ancient",
-    origin: "Halloween 2024 (Tier 20)"
+    origin: "Halloween 2024 (Tier 20)",
+    folder:"image"
   },
 
   {
@@ -48,7 +53,8 @@ const items = [
     image: "Harvester.png",
     value: 400,
     rarity: "Ancient",
-    origin: "Halloween 2021 (Tier 30)"
+    origin: "Halloween 2021 (Tier 30)",
+    folder:"image"
   },
 
   {
@@ -56,7 +62,8 @@ const items = [
     image: "Icepiercer.png",
     value: 300,
     rarity: "Ancient",
-    origin: "Natal 2022 (Tier 20)"
+    origin: "Natal 2022 (Tier 20)",
+    folder:"image"
   },
 
   {
@@ -64,7 +71,8 @@ const items = [
     image: "Icebreaker.png",
     value: 115,
     rarity: "Ancient",
-    origin: "Natal 2020 (Tier 20)"
+    origin: "Natal 2020 (Tier 20)",
+    folder:"image"
   },
 
   {
@@ -72,7 +80,8 @@ const items = [
     image: "Batwing.png",
     value: 57,
     rarity: "Ancient",
-    origin: "Halloween 2018 Item Pack"
+    origin: "Halloween 2018 Item Pack",
+    folder:"image"
   },
 
   {
@@ -80,7 +89,8 @@ const items = [
     image: "Swirly_Axe.png",
     value: 55,
     rarity: "Ancient",
-    origin: "Natal 2021 (Tier 20)"
+    origin: "Natal 2021 (Tier 20)",
+    folder:"image"
   },
 
   {
@@ -88,7 +98,8 @@ const items = [
     image: "Elderwood_Scythe.png",
     value: 55,
     rarity: "Ancient",
-    origin: "Halloween 2019 (Tier 40)"
+    origin: "Halloween 2019 (Tier 40)",
+    folder:"image"
   },
 
   {
@@ -96,7 +107,8 @@ const items = [
     image: "Hallowscythe.png",
     value: 45,
     rarity: "Ancient",
-    origin: "Halloween 2020 (Tier 30)"
+    origin: "Halloween 2020 (Tier 30)",
+    folder:"image"
   },
 
   {
@@ -104,7 +116,8 @@ const items = [
     image: "Logchopper.png",
     value: 20,
     rarity: "Ancient",
-    origin: "Natal 2019 (Tier 30)"
+    origin: "Natal 2019 (Tier 30)",
+    folder:"image"
   },
 
   {
@@ -112,7 +125,8 @@ const items = [
     image: "Icewing.png",
     value: 13,
     rarity: "Ancient",
-    origin: "Natal 2018 Item Pack"
+    origin: "Natal 2018 Item Pack",
+    folder:"image"
   },
 
   {
@@ -120,7 +134,8 @@ const items = [
     image: "Ghost.png",
     value: 10,
     rarity: "Vintage",
-    origin: "MM1 (1,200 Coins)"
+    origin: "MM1 (1,200 Coins)",
+    folder:"image"
   },
 
   {
@@ -128,7 +143,8 @@ const items = [
     image: "Blood.png",
     value: 8,
     rarity: "Vintage",
-    origin: "MM1 (4,000 Coins)"
+    origin: "MM1 (4,000 Coins)",
+    folder:"image"
   },
 
   {
@@ -136,7 +152,8 @@ const items = [
     image: "Laser.png",
     value: 8,
     rarity: "Vintage",
-    origin: "MM1 (1,200 Coins)"
+    origin: "MM1 (1,200 Coins)",
+    folder:"image"
   },
 
   {
@@ -144,7 +161,8 @@ const items = [
     image: "America.png",
     value: 8,
     rarity: "Vintage",
-    origin: "MM1 July 4th (25 Cash)"
+    origin: "MM1 July 4th (25 Cash)",
+    folder:"image"
   },
 
   {
@@ -152,7 +170,8 @@ const items = [
     image: "Prince.png",
     value: 6,
     rarity: "Vintage",
-    origin: "MM1 (2,000 Coins)"
+    origin: "MM1 (2,000 Coins)",
+    folder:"image"
   },
 
   {
@@ -160,7 +179,8 @@ const items = [
     image: "Shadow.png",
     value: 6,
     rarity: "Vintage",
-    origin: "MM1 (3,000 Coins)"
+    origin: "MM1 (3,000 Coins)",
+    folder:"image"
   },
   
   {
@@ -168,7 +188,8 @@ const items = [
     image: "Phaser.png",
     value: 5,
     rarity: "Vintage",
-    origin: "MM1 (2,000 Coins)"
+    origin: "MM1 (2,000 Coins)",
+    folder:"image"
   },
 
   {
@@ -176,7 +197,8 @@ const items = [
     image: "Cowboy.png",
     value: 4,
     rarity: "Vintage",
-    origin: "MM1 (800 Coins)"
+    origin: "MM1 (800 Coins)",
+    folder:"image"
   },
 
   {
@@ -184,7 +206,8 @@ const items = [
     image: "Golden.png",
     value: 4,
     rarity: "Vintage",
-    origin: "MM1 (3,500 Coins)"
+    origin: "MM1 (3,500 Coins)",
+    folder:"image"
   },
 
   {
@@ -192,7 +215,8 @@ const items = [
     image: "Splitter.png",
     value: 3,
     rarity: "Vintage",
-    origin: " MM1 (800 Coins)"
+    origin: " MM1 (800 Coins)",
+    folder:"image"
   },
 
 ];

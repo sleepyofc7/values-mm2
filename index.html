@@ -1,180 +1,201 @@
-```html
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>MM2 VALUES</title>
+<title>MM2 Values</title>
 
 <link rel="stylesheet" href="style.css">
 
-<!-- Fonte Apple -->
-<link href="https://fonts.cdnfonts.com/css/sf-pro-display" rel="stylesheet">
-
 </head>
+
 <body>
 
 <audio id="clickSound" src="click.mp3"></audio>
 
 <!-- BOTÃO MENU -->
-<div class="menu-btn" id="menuBtn" onclick="toggleMenu()">
-<span></span>
-<span></span>
-<span></span>
+
+<div class="menu-btn" onclick="toggleMenu()">
+☰
 </div>
 
-<!-- OVERLAY -->
-<div class="overlay" id="overlay" onclick="closeMenu()"></div>
+<!-- MENU LATERAL -->
 
-<!-- MENU -->
-<div class="menu glass" id="menu">
+<div id="menu" class="menu glass">
 
-<!-- EDITAR LINKS AQUI -->
-<a href="https://sleepyofc7.github.io/meu-hub/" target="_blank">🏠 HUB</a>
-<a href="https://roblox.com" target="_blank">Roblox</a>
-<a href="#">Atualizações</a>
+<h2>Menu</h2>
+
+<a href="#">Home</a>
+<a href="#">Trading</a>
+<a href="#">Discord</a>
+<a href="#">Outro Site</a>
 
 </div>
+
+<div id="overlay" onclick="toggleMenu()"></div>
+
+<!-- TITULO -->
 
 <header>
-<h1 class="title">MM2 VALUES</h1>
+
+<h1 class="title">
+MM2 VALUES
+</h1>
+
 </header>
 
-<!-- PESQUISA -->
-<div class="top-bar">
+<!-- FILTROS -->
 
-<div class="search">
-<input type="text" id="searchInput" placeholder="Search item..." oninput="renderItems()">
-</div>
+<div class="top-bar glass">
 
-<!-- CLASSIFICAÇÃO -->
-<select id="sortSelect" onchange="renderItems()">
-<option value="value">Valor</option>
+<select id="sort">
 <option value="az">A-Z</option>
+<option value="value">Valor</option>
 <option value="rarity">Raridade</option>
 </select>
+
+<span id="counter">0 itens</span>
 
 </div>
 
 <!-- CATEGORIAS -->
+
 <div class="categories">
 
-<button onclick="setCategory('all')">All</button>
-<button onclick="setCategory('Common')">Common</button>
-<button onclick="setCategory('Uncommon')">Uncommon</button>
-<button onclick="setCategory('Rare')">Rare</button>
-<button onclick="setCategory('Legendary')">Legendary</button>
-<button onclick="setCategory('Godly')">Godly</button>
-<button onclick="setCategory('Chroma')">Chroma</button>
-<button onclick="setCategory('Vintage')">Vintage</button>
-<button onclick="setCategory('Ancient')">Ancient</button>
-<button onclick="setCategory('Evo')">Evo</button>
-<button onclick="setCategory('Unique')">Unique</button>
+<button onclick="filterCategory('All')">All</button>
 
-<!-- others.js -->
-<button onclick="setCategory('Untradable')">Untradable</button>
-<button onclick="setCategory('Pet')">Pet</button>
-<button onclick="setCategory('Set')">Set</button>
-<button onclick="setCategory('Misc')">Misc</button>
+<button onclick="filterCategory('Common')">Common</button>
+<button onclick="filterCategory('Uncommon')">Uncommon</button>
+<button onclick="filterCategory('Rare')">Rare</button>
+<button onclick="filterCategory('Legendary')">Legendary</button>
+
+<button onclick="filterCategory('Godly')">Godly</button>
+<button onclick="filterCategory('Chroma')">Chroma</button>
+
+<button onclick="filterCategory('Vintage')">Vintage</button>
+<button onclick="filterCategory('Ancient')">Ancient</button>
+<button onclick="filterCategory('Evo')">Evo</button>
+<button onclick="filterCategory('Unique')">Unique</button>
+
+<button onclick="filterCategory('Untradable')">Untradable</button>
+<button onclick="filterCategory('Misc')">Misc item</button>
+<button onclick="filterCategory('Pet')">Pet</button>
+<button onclick="filterCategory('Set')">Set</button>
 
 </div>
 
-<!-- CONTADOR -->
-<div class="counter" id="counter"></div>
+<!-- ITENS -->
 
-<section class="items" id="itemsContainer"></section>
+<div id="items" class="items"></div>
 
 <script src="items.js"></script>
 <script src="others.js"></script>
 
 <script>
 
-let currentCategory="all"
+let allItems = [...items, ...others]
+let current = [...allItems]
 
-const allItems=[...items,...others]
+function render(){
 
-document.addEventListener("click",()=>{
-const audio=document.getElementById("clickSound")
-audio.currentTime=0
-audio.play()
-})
+let container = document.getElementById("items")
 
-function toggleMenu(){
+container.innerHTML = ""
 
-menu.classList.add("open")
-overlay.classList.add("active")
-menuBtn.classList.add("hidden")
+current.forEach(item=>{
 
-}
+let glow = ""
 
-function closeMenu(){
+if(item.rarity=="Godly") glow="godly"
+if(item.rarity=="Chroma") glow="chroma"
 
-menu.classList.remove("open")
-overlay.classList.remove("active")
-menuBtn.classList.remove("hidden")
+container.innerHTML+=`
 
-}
-
-function setCategory(cat){
-
-currentCategory=cat
-renderItems()
-
-}
-
-function renderItems(){
-
-const container=document.getElementById("itemsContainer")
-const search=document.getElementById("searchInput").value.toLowerCase()
-const sort=document.getElementById("sortSelect").value
-
-container.innerHTML=""
-
-let filtered=allItems.filter(item=>{
-
-const matchCategory=currentCategory==="all" || item.rarity===currentCategory
-const matchSearch=item.name.toLowerCase().includes(search)
-
-return matchCategory && matchSearch
-
-})
-
-if(sort==="value") filtered.sort((a,b)=>b.value-a.value)
-
-if(sort==="az") filtered.sort((a,b)=>a.name.localeCompare(b.name))
-
-if(sort==="rarity") filtered.sort((a,b)=>a.rarity.localeCompare(b.rarity))
-
-document.getElementById("counter").innerText="Itens encontrados: "+filtered.length
-
-filtered.forEach(item=>{
-
-const div=document.createElement("div")
-div.className="item glass "+item.rarity
-
-div.innerHTML=`
+<div class="item glass ${glow}">
 
 <img src="${item.folder}/${item.image}">
 
 <h3>${item.name}</h3>
 
-<p>Valor: ${item.value}</p>
+<p>${item.value}</p>
 
-<p>${item.rarity}</p>
+</div>
 
 `
 
-container.appendChild(div)
-
 })
+
+document.getElementById("counter").innerText=current.length+" itens"
 
 }
 
-renderItems()
+function filterCategory(cat){
+
+playClick()
+
+if(cat=="All"){
+current=[...allItems]
+}else{
+current=allItems.filter(i=>i.rarity==cat)
+}
+
+render()
+
+}
+
+document.getElementById("sort").addEventListener("change",e=>{
+
+playClick()
+
+let v=e.target.value
+
+if(v=="az"){
+
+current.sort((a,b)=>a.name.localeCompare(b.name))
+
+}
+
+if(v=="value"){
+
+current.sort((a,b)=>b.value-a.value)
+
+}
+
+if(v=="rarity"){
+
+current.sort((a,b)=>a.rarity.localeCompare(b.rarity))
+
+}
+
+render()
+
+})
+
+function toggleMenu(){
+
+playClick()
+
+let menu=document.getElementById("menu")
+let overlay=document.getElementById("overlay")
+
+menu.classList.toggle("open")
+overlay.classList.toggle("show")
+
+}
+
+function playClick(){
+
+document.getElementById("clickSound").play()
+
+}
+
+document.addEventListener("click",playClick)
+
+render()
 
 </script>
 
 </body>
 </html>
-```
