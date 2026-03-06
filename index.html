@@ -132,11 +132,15 @@ html+=`
 
 <h3>${item.name}</h3>
 
-<p>💰 Valor: ${item.value}</p>
-<p>⭐ Raridade: ${item.rarity}</p>
-<p>📦 Origem: ${item.origin || "Unknown"}</p>
-<p>📈 Demanda: ${item.demand || "?"}</p>
-<p>📊 Estabilidade: ${item.stability || "?"}</p>
+<div class="info">
+
+<p class="valor">💰 ${item.value}</p>
+
+<p class="extra">📈 Demanda: ${item.demand || "?"}</p>
+<p class="extra">📊 Estabilidade: ${item.stability || "?"}</p>
+<p class="extra">📦 Origem: ${item.origin || "Unknown"}</p>
+
+</div>
 
 </div>
 
