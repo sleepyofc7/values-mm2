@@ -17,18 +17,20 @@
 
 <!-- BOTÃO MENU -->
 
-<div class="menu-btn" onclick="toggleMenu();playClick()">
+<div id="menuBtn" class="menu-btn" onclick="toggleMenu();playClick()">
 ☰
 </div>
 
-<!-- MENU LATERAL -->
+<!-- MENU -->
 
 <div id="menu" class="menu glass">
 
 <h2>Menu</h2>
 
-<a onclick="playClick()" href="https://sleepyofc7.github.io/meu-hub/" target="_blank">🏠HUB</a>
+<a onclick="playClick()" href="https://sleepyofc7.github.io/meu-hub/" target="_blank">🏠 HUB</a>
+
 <a onclick="playClick()" href="https://www.roblox.com/pt/games/142823291/Murder-Mystery-2" target="_blank">Murder Mystery</a>
+
 <a onclick="playClick()" href="https://sleepyofc7.github.io/CONTADOR-DE-PARTIDAS-MM2/" target="_blank">Contador de Partidas</a>
 
 </div>
@@ -41,7 +43,7 @@
 
 </header>
 
-<!-- 🔎 PESQUISA -->
+<!-- PESQUISA -->
 
 <div class="search glass">
 
@@ -98,6 +100,28 @@ oninput="searchItems()"
 
 <div id="items" class="items"></div>
 
+<!-- POPUP ITEM -->
+
+<div id="itemPopup" class="popup">
+
+<div class="popup-content glass">
+
+<span class="close" onclick="closePopup()">✖</span>
+
+<img id="popupImg">
+
+<h2 id="popupName"></h2>
+
+<p id="popupValue"></p>
+<p id="popupRarity"></p>
+<p id="popupOrigin"></p>
+<p id="popupDemand"></p>
+<p id="popupStability"></p>
+
+</div>
+
+</div>
+
 <script src="items.js"></script>
 <script src="others.js"></script>
 
@@ -121,13 +145,13 @@ if(item.rarity=="Chroma") glow="chroma"
 
 container.innerHTML+=`
 
-<div class="item glass ${glow}">
+<div class="item glass ${glow}" onclick='openItem(${JSON.stringify(item)})'>
 
-<img src="${item.folder}/${item.image}">
+<img src="images/${item.image}">
 
 <h3>${item.name}</h3>
 
-<p>${item.value}</p>
+<p>💰 ${item.value}</p>
 
 </div>
 
@@ -136,6 +160,28 @@ container.innerHTML+=`
 })
 
 document.getElementById("counter").innerText=current.length+" itens"
+
+}
+
+function openItem(item){
+
+playClick()
+
+document.getElementById("itemPopup").style.display="flex"
+
+document.getElementById("popupImg").src="images/"+item.image
+document.getElementById("popupName").innerText=item.name
+document.getElementById("popupValue").innerText="💰 Valor: "+item.value
+document.getElementById("popupRarity").innerText="⭐ Raridade: "+item.rarity
+document.getElementById("popupOrigin").innerText="🎲 Origem: "+(item.origin||"Unknown")
+document.getElementById("popupDemand").innerText="📈 Demand: "+(item.demand||"?")
+document.getElementById("popupStability").innerText="📊 Stability: "+(item.stability||"?")
+
+}
+
+function closePopup(){
+
+document.getElementById("itemPopup").style.display="none"
 
 }
 
@@ -194,9 +240,16 @@ function toggleMenu(){
 
 let menu=document.getElementById("menu")
 let overlay=document.getElementById("overlay")
+let btn=document.getElementById("menuBtn")
 
 menu.classList.toggle("open")
 overlay.classList.toggle("show")
+
+if(menu.classList.contains("open")){
+btn.style.display="none"
+}else{
+btn.style.display="block"
+}
 
 }
 
