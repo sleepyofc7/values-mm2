@@ -5,9 +5,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<div class="title">
-<img src="title.png">
-</div>
+<title>MM2 Values</title>
 
 <link rel="stylesheet" href="style.css">
 
@@ -23,13 +21,16 @@
 ☰
 </div>
 
-<!-- MENU LATERAL -->
+<!-- MENU -->
 
 <div id="menu" class="menu glass">
 
+<div class="menu-top">
 <h2>Menu</h2>
+<div class="close-btn" onclick="toggleMenu()">✕</div>
+</div>
 
-<a onclick="playClick()" href="https://sleepyofc7.github.io/meu-hub/" target="_blank">🏠HUB</a>
+<a onclick="playClick()" href="https://sleepyofc7.github.io/meu-hub/" target="_blank">🏠 HUB</a>
 <a onclick="playClick()" href="https://www.roblox.com/pt/games/142823291/Murder-Mystery-2" target="_blank">Murder Mystery</a>
 <a onclick="playClick()" href="https://sleepyofc7.github.io/CONTADOR-DE-PARTIDAS-MM2/" target="_blank">Contador de Partidas</a>
 
@@ -37,7 +38,13 @@
 
 <div id="overlay" onclick="toggleMenu()"></div>
 
-<!-- 🔎 PESQUISA -->
+<!-- TITLE -->
+
+<div class="title">
+<img src="title.png">
+</div>
+
+<!-- SEARCH -->
 
 <div class="search glass">
 
@@ -108,6 +115,8 @@ let container=document.getElementById("items")
 
 container.innerHTML=""
 
+let html=""
+
 current.forEach(item=>{
 
 let glow=""
@@ -115,25 +124,27 @@ let glow=""
 if(item.rarity=="Godly") glow="godly"
 if(item.rarity=="Chroma") glow="chroma"
 
-container.innerHTML+=`
+html+=`
 
 <div class="item glass ${glow}">
 
-<img src="${item.folder}/${item.image}">
+<img loading="lazy" src="${item.folder}/${item.image}">
 
 <h3>${item.name}</h3>
 
-<p>💰VALOR: ${item.value}</p>
-<p>⭐RARIDADE: ${item.rarity}</p>
-<p>📦ORIGEM: ${item.origin || "Unknown"}</p>
-<p>📈DEMANDA: ${item.demand || "?"}</p>
-<p>📊ESTABILIDADE: ${item.stability || "?"}</p>
+<p>💰 Valor: ${item.value}</p>
+<p>⭐ Raridade: ${item.rarity}</p>
+<p>📦 Origem: ${item.origin || "Unknown"}</p>
+<p>📈 Demanda: ${item.demand || "?"}</p>
+<p>📊 Estabilidade: ${item.stability || "?"}</p>
 
 </div>
 
 `
 
 })
+
+container.innerHTML=html
 
 document.getElementById("counter").innerText=current.length+" itens"
 
@@ -181,9 +192,7 @@ playClick()
 let v=e.target.value
 
 if(v=="az") current.sort((a,b)=>a.name.localeCompare(b.name))
-
 if(v=="value") current.sort((a,b)=>b.value-a.value)
-
 if(v=="rarity") current.sort((a,b)=>a.rarity.localeCompare(b.rarity))
 
 render()
