@@ -1,5 +1,5 @@
 // 🔥 AQUI VOCÊ ADICIONA SEUS ITENS
-// NÃO PRECISA MAIS ESCREVER HTML
+// ANCIENTS
 
 const items = [
 
@@ -156,7 +156,7 @@ const items = [
     origin: "Natal 2018 Item Pack",
     folder:"image"
   },
-
+// VINTAGES
   {
     name: "Ghost",
     image: "Ghost.png",
