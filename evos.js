@@ -11,5 +11,7 @@ rarity: "Vintage",
 origin: " MM1 (800 Coins)",
 folder:"image"
 },
-  
+
+startEffects()   // 👈 ADICIONE ISSO AQUI
+
 ];

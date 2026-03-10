@@ -143,4 +143,6 @@ image:"Candy_2017.png",
 folder:"misc"
 },
 
+startEffects()   // 👈 ADICIONE ISSO AQUI
+
 ];
