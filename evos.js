@@ -1,5 +1,5 @@
 // EVOS
-const items = [
+const evos = [
     
 {
 name: "Icecrusher (V4)",

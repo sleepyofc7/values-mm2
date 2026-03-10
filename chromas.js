@@ -1,4 +1,4 @@
-const items = [
+const chromas = [
 
   {
     name: "C. Traveler's Gun",
@@ -10,5 +10,5 @@ const items = [
     origin: "Halloween 2023 (Unboxed)",
     folder:"chroma"
   },
-  
+
 ];

@@ -1,4 +1,4 @@
-const others=[
+const misc=[
 
 {
 name:"Mystery Key",
