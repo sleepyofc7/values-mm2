@@ -267,6 +267,4 @@ const items = [
     folder:"image"
   },
 
-  startEffects()   // 👈 ADICIONE ISSO AQUI
-  
 ];
