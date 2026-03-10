@@ -222,7 +222,7 @@ transition:transform 0.15s, background 0.2s;
 
 .categories button:hover{
 
-transform:scale(1.05);
+transform:scale(1.07);
 
 background:rgba(255,255,255,0.15);
 
@@ -232,7 +232,7 @@ background:rgba(255,255,255,0.15);
 
 background:rgba(255,255,255,0.25);
 
-transform:scale(1.08);
+transform:scale(1.1);
 
 }
 
@@ -267,20 +267,32 @@ text-align:center;
 
 padding:14px;
 
-transition:transform 0.18s;
+transition:transform .18s, opacity .25s ease;
 
 contain:content;
 
 /* GPU */
 
-will-change:transform;
+will-change:transform, opacity;
 transform:translateZ(0);
+
+/* FADE ANIMATION */
+
+opacity:0;
+transform:translateY(10px);
+
+}
+
+.item.show{
+
+opacity:1;
+transform:translateY(0);
 
 }
 
 .item:hover{
 
-transform:scale(1.05);
+transform:scale(1.06);
 
 }
 

@@ -121,11 +121,11 @@ let current=[...allItems]
 
 function render(){
 
-let container=document.getElementById("items")
+let container = document.getElementById("items")
 
 container.innerHTML=""
 
-let html=""
+let fragment = document.createDocumentFragment()
 
 current.forEach(item=>{
 
@@ -134,12 +134,11 @@ let glow=""
 if(item.rarity=="Godly") glow="godly"
 if(item.rarity=="Chroma") glow="chroma"
 
-html+=`
+let div = document.createElement("div")
+div.className = `item glass ${glow}`
 
-<div class="item glass ${glow}">
-
-<img loading="lazy" src="${item.folder}/${item.image}">
-
+div.innerHTML = `
+<img loading="lazy" src="${item.folder}/${item.image}" onerror="this.src='fallback.png'">
 <h3>${item.name}</h3>
 
 <div class="info">
@@ -151,14 +150,19 @@ html+=`
 <p class="extra">📦 Origem: ${item.origin || "Unknown"}</p>
 
 </div>
-
-</div>
-
 `
+
+fragment.appendChild(div)
+
+requestAnimationFrame(()=>{
+document.querySelectorAll(".item").forEach(i=>{
+i.classList.add("show")
+})
+})
 
 })
 
-container.innerHTML=html
+container.appendChild(fragment)
 
 document.getElementById("counter").innerText=current.length+" itens"
 
