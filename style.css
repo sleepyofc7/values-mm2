@@ -9,6 +9,9 @@ overflow-x:hidden;
 
 cursor:url(cursor.png),auto;
 
+-webkit-font-smoothing:antialiased;
+text-rendering:optimizeLegibility;
+
 }
 
 /* GLASS */
@@ -252,6 +255,7 @@ margin:auto;
 /* PERFORMANCE */
 
 content-visibility:auto;
+contain-intrinsic-size:180px;
 
 }
 
@@ -266,6 +270,11 @@ padding:14px;
 transition:transform 0.18s;
 
 contain:content;
+
+/* GPU */
+
+will-change:transform;
+transform:translateZ(0);
 
 }
 
@@ -285,6 +294,10 @@ height:72px;
 object-fit:contain;
 
 image-rendering:auto;
+
+/* PERFORMANCE */
+
+content-visibility:auto;
 
 }
 
