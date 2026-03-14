@@ -409,13 +409,134 @@ folder:"pets"
 },
 
 {
-name: "Blue Pumpkin (2019)",
-image: "Blue_Pumpkin_2019.png",
+name: "Shadow Pumpkin",
+image: "Shadow_Pumpkin_2021.png",
 value: "2",
 demand: "2",
 stability: "Estável",
 rarity: "Pet",
-origin: "Halloween 2019 (Tier 9)",
+origin: "Halloween 2021 (Tier 11)",
+folder:"pets"
+},
+
+{
+name: "Badger",
+image: "Badger.png",
+value: "1",
+demand: "1",
+stability: "Estável",
+rarity: "Pet",
+origin: "Classic Pet Box",
+folder:"pets"
+},
+
+{
+name: "Steambird",
+image: "Steambird.png",
+value: "1",
+demand: "1",
+stability: "item mal pago",
+rarity: "Pet",
+origin: "Steampunk Item Pack",
+folder:"pets"
+},
+
+{
+name: "Traveller",
+image: "Traveller.png",
+value: "1",
+demand: "1",
+stability: "item mal pago",
+rarity: "Pet",
+origin: "Halloween 2017 Item Pack",
+folder:"pets"
+},
+
+{
+name: "Deathspeaker",
+image: "Deathspeaker.png",
+value: "1",
+demand: "1",
+stability: "item mal pago",
+rarity: "Pet",
+origin: "Classic Pet Box",
+folder:"pets"
+},
+
+{
+name: "Electro",
+image: "Electro.png",
+value: "1",
+demand: "1",
+stability: "item mal pago",
+rarity: "Pet",
+origin: "Futuristic Item Pack",
+folder:"pets"
+},
+
+{
+name: "Frostbird",
+image: "Frostbird.png",
+value: "1",
+demand: "1",
+stability: "item mal pago",
+rarity: "Pet",
+origin: "Natal 2018 (Tier 100)",
+folder:"pets"
+},
+
+{
+name: "Ice_Phoenix",
+image: "Ice_Phoenix.png",
+value: "1",
+demand: "1",
+stability: "item mal pago",
+rarity: "Pet",
+origin: "Xmas 2017 Item Pack",
+folder:"pets"
+},
+
+{
+name: "Phoenix",
+image: "Phoenix.png",
+value: "1",
+demand: "1",
+stability: "item mal pago",
+rarity: "Pet",
+origin: "8-Bit Item Pack",
+folder:"pets"
+},
+
+{
+name: "Sammy",
+image: "Sammy.png",
+value: "1",
+demand: "1",
+stability: "item mal pago",
+rarity: "Pet",
+origin: "American Item Pack",
+folder:"pets"
+},
+
+{
+name: "Skelly",
+image: "Skelly.png",
+value: "1",
+demand: "1",
+stability: "item mal pago",
+rarity: "Pet",
+origin: "Shadow Item Pack",
+folder:"pets"
+},
+//TIER 2
+{
+name: "FBat",
+image: "FBat.png",
+value: "1",
+demand: "1",
+stability: "item mal pago",
+rarity: "Pet",
+origin: "Shadow Item Pack",
 folder:"pets"
 },
 
